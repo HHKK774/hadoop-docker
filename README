@@ -1,1 +1,10 @@
-2333
+# please run "docker build -t eg_sshd" to build the eg_sshd image first
+# then run "docker run -d -P --name test_sshd eg_sshd"
+# i don't integrate it into the script because it doesn't have to be run repeatedly
+
+# since the image "hadoop-docker" cannot be pushed to docker hub now, i save it to local
+# and you should load the image x(in this package)x by running "docker load --input hadoop-docker.tar" (you can ask me for the file if needed)
+# you can also tag the image and push it to your docker hub if you can
+
+# the master node would not start resource-manager and node-manager automatically
+# we can exec into the bash of master node then run start-all. it's the same because at last we have to run mapreduce on it
