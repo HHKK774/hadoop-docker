@@ -2,8 +2,7 @@
 
 # please run "docker build -t eg_sshd" to build the eg_sshd image first
 # then run "docker run -d -P --name test_sshd eg_sshd"
-# and you should load the image in this package by running "docker load --input hadoop-docker.tar"
-# you can also tag the image and push it to your docker hub if you can
+docker pull hhkk774/hadoop-docker
 
 #define number of nodes
 N=$1
@@ -13,7 +12,7 @@ then
 fi
 
 #start master node
-docker run -idt -h mastert --name mastert hadoop-docker
+docker run -idt -h mastert --name mastert hhkk774/hadoop-docker
 MASTER_ID=$(docker inspect -f '{{.Id}}' mastert)
 
 #start slaves
@@ -23,7 +22,7 @@ echo $N
 echo $i
 while [ $i -lt $N ]
 do	
-	docker run -idt -h node${i}t --name node${i}t hadoop-docker
+	docker run -idt -h node${i}t --name node${i}t hhkk774/hadoop-docker
 	NODE_ID[i]=$(docker inspect -f '{{.Id}}' node${i}t)
 	echo "node${i}t">>slaves
 	((i++))
@@ -46,4 +45,4 @@ do
 	((j++))
 done
 
-docker exec -it mastert bash
+#docker exec -it mastert bash
